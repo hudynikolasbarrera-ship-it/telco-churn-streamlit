@@ -5,6 +5,15 @@ Google Cloud. Incluye entrenamiento reproducible (`train.py`), una app web en
 Streamlit (`app.py`), empaquetado con Docker y despliegue en una VM de
 Google Compute Engine.
 
+## 🚀 App desplegada
+- **URL:** http://34.70.79.184:8501
+- **Infraestructura:** VM de Google Compute Engine (Debian 13, us-central1) + contenedor Docker.
+- **Notebook de desarrollo:** `Taller_ML2_Churn.ipynb` (exploración, limpieza, comparación de modelos y pruebas).
+
+![App desplegada en Google Cloud](app_desplegada.png)
+
+*Caso 1 evaluado en la app desplegada: probabilidad de abandono de 91,3 % → Riesgo ALTO.*
+
 ## 1. Objetivo
 Predecir si un cliente de una empresa de telecomunicaciones **abandonará el
 servicio (churn)**, para poder aplicar acciones de retención a tiempo.
@@ -156,7 +165,7 @@ docker logs ml-streamlit
 Abrir `http://localhost:8501` (local) o `http://IP_EXTERNA:8501` (VM).
 
 ## 14. Despliegue en Google Cloud (Compute Engine)
-1. Crear una VM **Ubuntu 24.04 LTS** (por ejemplo `e2-small`) con IP externa
+1. Crear una VM Linux (**Ubuntu 24.04 LTS** o **Debian**; en este proyecto se usó Debian 13) con IP externa
    y la etiqueta de red `streamlit-server`.
 2. Abrir la terminal con el botón **SSH** de la consola e instalar Docker y Git:
 ~~~bash
@@ -211,6 +220,21 @@ sudo docker run -d --name ml-streamlit --restart unless-stopped -p 8501:8501 ml-
 | El contenedor se detiene | `sudo docker ps -a` y `sudo docker logs ml-streamlit`. |
 | Funciona en la VM pero no desde fuera | Revisar regla de firewall, etiqueta `streamlit-server` e IP externa. |
 | Cambios no aparecen | `git pull` → detener/eliminar contenedor → `docker build` → `docker run`. |
+
+## 16.1 Pruebas realizadas
+- `train.py` reproduce exactamente las métricas del notebook (misma matriz de confusión: 785 / 250 / 92 / 282).
+- Prueba automática con `streamlit.testing.v1.AppTest`: la app carga sin errores, el botón "Predecir" devuelve 91,3 % para el Caso 1 y la validación "sin internet" bloquea los campos dependientes.
+- Imagen Docker construida en la VM y contenedor en estado `healthy`.
+- Flujo de actualización probado: cambio en GitHub → `git pull` → `docker build` → nuevo contenedor.
+
+## 16.2 Prueba cruzada
+| Campo | Detalle |
+|---|---|
+| Realizada por | *(nombre del compañero)* |
+| Fecha | *(fecha)* |
+| ¿Clonó y construyó solo con el README? | *(Sí / No)* |
+| ¿El contenedor funcionó? | *(Sí / No)* |
+| Observaciones | *(instrucciones faltantes o errores encontrados)* |
 
 ## 17. Autor
 - Nicolás Barrera Castañeda
