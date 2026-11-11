@@ -175,3 +175,13 @@ if st.button("🔮 Predecir abandono", type="primary", use_container_width=True)
     c1.metric("Probabilidad de abandono", porcentaje)
     c2.metric("Predicción del modelo", artifact["target_labels"][pred])
     st.progress(proba)
+
+    if pred == 1:
+        st.error(f"{nivel}: {mensaje}")
+    else:
+        st.success(f"{nivel}: {mensaje}")
+
+    with st.expander("Ver datos enviados al modelo"):
+        st.dataframe(X_new, hide_index=True)
+
+st.caption("Proyecto Machine Learning 2 · Pipeline scikit-learn + Streamlit + Docker + GCP")
