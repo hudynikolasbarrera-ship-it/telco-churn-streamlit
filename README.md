@@ -228,13 +228,7 @@ sudo docker run -d --name ml-streamlit --restart unless-stopped -p 8501:8501 ml-
 - Flujo de actualización probado: cambio en GitHub → `git pull` → `docker build` → nuevo contenedor.
 
 ## 16.2 Prueba cruzada
-| Campo | Detalle |
-|---|---|
-| Realizada por | *(nombre del compañero)* |
-| Fecha | *(fecha)* |
-| ¿Clonó y construyó solo con el README? | *(Sí / No)* |
-| ¿El contenedor funcionó? | *(Sí / No)* |
-| Observaciones | *(instrucciones faltantes o errores encontrados)* |
+No se realizó: el taller se desarrolló de forma individual. El repositorio queda preparado para que cualquier persona lo reproduzca siguiendo únicamente este README (secciones 10 a 14).
 
 ## 17. Autor
 - Nicolás Barrera Castañeda
